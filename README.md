@@ -203,15 +203,14 @@ You should see messages such as:
 
 Let the experiment run -- **it can take up to 24 hours** and it will generate about X GB of data.
 
-::: warning
-Please note that this is the "*compressed*" version of the experiment, which collects data more sparsely. The original experiment took about 38 hours. If you wish to reduce the experiment time more significantly, open the `run-all-experiments.sh` file and comment out the following lines. These two lines correspond to runs with input rate at 2 Hz, which is the most time consuming.
-
-```
-# node run-experiment.js $exp_file V3-2fps false
-
-# node run-experiment.js $exp_file V3-2fps true
-```
-:::
+>[!NOTE]
+> Please note that this is the "*compressed*" version of the experiment, which collects data more sparsely. The original experiment took about 38 hours. If you wish to reduce the experiment time more significantly, open the `run-all-experiments.sh` file and comment out the following lines. These two lines correspond to runs with input rate at 2 Hz, which is the most time consuming.
+>
+> ```
+> # node run-experiment.js $exp_file V3-2fps false
+> 
+> # node run-experiment.js $exp_file V3-2fps true
+> ```
 
 Once the experiments have finished, there will be one or more directories in `/root/output` named `exp-YYYY-mm-dd`.
 ```
