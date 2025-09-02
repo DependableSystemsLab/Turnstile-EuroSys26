@@ -29,7 +29,7 @@ You can run the artifact on any machine using Docker, but the performance you ob
 
 ### Getting Started
 
-The quickest and recommended way to get started with running the artifact is to use the pre-built Docker image, as it has the experiment environment already prepared with all the dependencies installed and workloads copied. The `Dockerfile` used to build the image can be found in this repository. The Docker image contains the following:
+The quickest and recommended way to get started with running the artifact is to use the [pre-built Docker image](https://drive.google.com/file/d/161drqct_DJ88BEEwjgyp3gE8_VaNjpiF/view?usp=sharing), as it has the experiment environment already prepared with all the dependencies installed and workloads copied. The `Dockerfile` used to build the image can be found in this repository. The Docker image contains the following:
 
 * The contents of this repository
 * CodeQL (2.16.5)
@@ -38,7 +38,7 @@ The quickest and recommended way to get started with running the artifact is to 
 * 61 third-party Node-RED repositories used in the evaluation (Section 6) and their dependencies
 * The experimental workload used in the run-time experiment described in Section 6.2
 
-First, download the Docker image from here.
+First, download the Docker image from [HERE](https://drive.google.com/file/d/161drqct_DJ88BEEwjgyp3gE8_VaNjpiF/view?usp=sharing).
 Then, load the image as the following:
 
 ```
