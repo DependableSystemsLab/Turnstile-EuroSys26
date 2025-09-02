@@ -1,0 +1,6 @@
+name: codeql/javascript-turnstile
+groups:
+  - javascript
+dependencies:
+    codeql/javascript-all: ~0.8.11
+warnOnImplicitThis: true

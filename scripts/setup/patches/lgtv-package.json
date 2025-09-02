@@ -1,0 +1,57 @@
+{
+  "name": "node-red-contrib-lgtv",
+  "version": "1.1.0",
+  "description": "Node-RED Nodes to control LG webOS Smart TVs",
+  "scripts": {
+    "test": "xo",
+    "lintfix": "xo --fix"
+  },
+  "keywords": [
+    "node-red",
+    "LG",
+    "WebOS",
+    "Smart",
+    "TV"
+  ],
+  "repository": "https://github.com/hobbyquaker/node-red-contrib-lgtv",
+  "author": "Sebastian Raff",
+  "contributors": [
+      "itsj4y <itsj4y@yahoo.com> https://github.com/itsj4y"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "lgtv2": "^1.4.1"
+  },
+  "node-red": {
+    "nodes": {
+      "lgtv-config": "nodes/lgtv-config.js",
+      "lgtv-control": "nodes/lgtv-control.js",
+      "lgtv-button": "nodes/lgtv-button.js",
+      "lgtv-mouse": "nodes/lgtv-mouse.js",
+      "lgtv-toast": "nodes/lgtv-toast.js",
+      "lgtv-browser": "nodes/lgtv-browser.js",
+      "lgtv-youtube": "nodes/lgtv-youtube.js",
+      "lgtv-app": "nodes/lgtv-app.js",
+      "lgtv-volume": "nodes/lgtv-volume.js",
+      "lgtv-mute": "nodes/lgtv-mute.js",
+      "lgtv-channel": "nodes/lgtv-channel.js",
+      "lgtv-request": "nodes/lgtv-request.js"
+    }
+  },
+  "devDependencies": {
+    "eslint-plugin-html": "^6.0.0",
+    "xo": "^0.24.0"
+  },
+  "xo": {
+    "space": 4,
+    "plugin": "html",
+    "extensions": [
+      "js",
+      "html"
+    ],
+    "global": [
+      "$",
+      "RED"
+    ]
+  }
+}
