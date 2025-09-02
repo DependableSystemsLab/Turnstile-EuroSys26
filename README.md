@@ -25,6 +25,7 @@ We recommend that the machine has at least 10 GB of disk space available for the
 
 You can run the artifact on any machine using Docker, but the performance you observe might be slightly different than those in the paper due to platform differences.
 
+---
 
 ### Getting Started
 
@@ -126,6 +127,11 @@ node run-codeql-multiple.js REPOLIST.txt
 
 The `REPOLIST.txt` contains the list of target repositories to be analyzed. The `run-codeql-multiple.js` iterates through each entry, invoking a series of CodeQL commands to perform the analysis. You should see messages such as:
 ```
+=====================================
+Begin analyzing /root/target-repos/node-red-contrib-viseo/node-red-contrib-airtable
+  ... creating codeql database at /root/codeql-db/node-red-contrib-viseo.node-red-contrib-airtable
+  ... finished in 27.343 seconds
+  ... analyzing codeql database at /root/codeql-db/node-red-contrib-viseo.node-red-contrib-airtable
 
 ```
 
@@ -141,6 +147,8 @@ node run-turnstile-multiple.js REPOLIST.txt
 
 The process is similar -- the `run-turnstile-multiple.js` script iterates through the list of repositories and runs the static taint analysis. Each analysis will be invoked 10 times to obtain an average run-time. You should see messages such as:
 ```
+/root/target-repos/node-red-contrib-viseo/node-red-contrib-airtable
+1866ms, 1530ms, 2100ms,
 ```
 
 **The Turnstile analysis can take up to 4 minutes**.
@@ -199,9 +207,17 @@ Simply run this script:
 
 You should see messages such as:
 ```
+========================================
+Starting Experiment 1: airtable
+----------------------------------------
+
+
+---[ Stage 1: Started ]---
+
+/root/target-repos/node-red-contrib-viseo/node-red-contrib-airtable is a directory... trying to read as an NPM package
 ```
 
-Let the experiment run -- **it can take up to 24 hours** and it will generate about X GB of data.
+Let the experiment run -- **it can take up to 24 hours** and it will generate about 3.86 GB of data.
 
 >[!NOTE]
 > Please note that this is the "*compressed*" version of the experiment, which collects data more sparsely. The original experiment took about 38 hours. If you wish to reduce the experiment time more significantly, open the `run-all-experiments.sh` file and comment out the following lines. These two lines correspond to runs with input rate at 2 Hz, which is the most time consuming.
@@ -215,8 +231,8 @@ Let the experiment run -- **it can take up to 24 hours** and it will generate ab
 Once the experiments have finished, there will be one or more directories in `/root/output` named `exp-YYYY-mm-dd`.
 ```
 # For example:
-exp-2025-09-01
-exp-2025-09-02
+exp-2025-09-01/
+exp-2025-09-02/
 ```
 
 The directory contains the raw measurements from each run, which need to be "compiled" for further processing.
@@ -272,42 +288,42 @@ This concludes the steps for reproducing the results in Section 6.2.
 
 In case you want to explore further, here we describe how to use the "micro-scripts" for running a single taint analysis or a single run-time experiment run. In practice, a researcher or a developer actively using Turnstile is more likely to use these scripts, rather than the automation scripts above.
 
-* **`scripts/analysis/run-codeql-single.js`** runs the CodeQL taint analysis on a single repository. You can use it as the following:
+**`scripts/analysis/run-codeql-single.js`** runs the CodeQL taint analysis on a single repository. You can use it as the following:
 ```
 node run-codeql-single.js repository/root/path
 ```
 Replace the `repository/root/path` with any of the entries in `REPOLIST.txt`. You can also provide an absolute path to any other third-party repository, if you wish to try the taint analysis on any other repository that was not covered in the paper.
 
-* **`scripts/analysis/run-turnstile-single.js`** runs the Turnstile taint analysis on a single repository. You can use it as the following:
+**`scripts/analysis/run-turnstile-single.js`** runs the Turnstile taint analysis on a single repository. You can use it as the following:
 ```
 node run-turnstile-single.js repository/root/path
 ```
 Replace the `repository/root/path` with any of the entries in `REPOLIST.txt`. Same as the above, you can also provide an absolute path to any other third-party repository.
 
-* **`scripts/experiment/generate-workload.js`** generates a workload for a given experiment.
+**`scripts/experiment/generate-workload.js`** generates a workload for a given experiment.
 ```
 node generate-workload.js $exp_file $workload_size $label_count $input_interval $label_hierarchy $workload_name
 
 # Example usage:
 node generate-workload.js watson 1000 3 50 vertical V3-20fps
 ```
-    * `$exp_file` is the name of the experiment, and should be one of the entries in `scripts/experiment/workloads/EXPERIMENT_LIST.txt`.
-    * `$workload_size` is the total number of input messages.
-    * `$label_count` is the number of label types. It is applicable only if the $label_hierarchy is "vertical" or "horizontal".
-    * `$input_interval` is the interval between subsequent input messages, in milliseconds.
-    * `$label_hierarchy` is the type of label hierarchy, and can be `vertical`, `horizontal`, or `tree.{D}.{B}`. The `tree.{D}.{B}` is used to generate a tree-based hiearchy where `{D}` is the depth (height) of the tree and `{B}` is the branching factor.
-    * `$workload_name` is the name to assign to the generated workload. When running an experiment, we refer to the workload by this name.
+  * `$exp_file` is the name of the experiment, and should be one of the entries in `scripts/experiment/workloads/EXPERIMENT_LIST.txt`.
+  * `$workload_size` is the total number of input messages.
+  * `$label_count` is the number of label types. It is applicable only if the $label_hierarchy is "vertical" or "horizontal".
+  * `$input_interval` is the interval between subsequent input messages, in milliseconds.
+  * `$label_hierarchy` is the type of label hierarchy, and can be `vertical`, `horizontal`, or `tree.{D}.{B}`. The `tree.{D}.{B}` is used to generate a tree-based hiearchy where `{D}` is the depth (height) of the tree and `{B}` is the branching factor.
+  * `$workload_name` is the name to assign to the generated workload. When running an experiment, we refer to the workload by this name.
 
-* **`scripts/experiment/run-experiment.js`** runs the performance experiment for a given application and workload.
+**`scripts/experiment/run-experiment.js`** runs the performance experiment for a given application and workload.
 ```
 node run-experiment.js $exp_file $workload_name $is_exhaustive
 
 # Example usage:
 node run-experiment.js watson V3-20fps true
 ```
-   * `$exp_file` is the name of the experiment, and should be one of the entries in `scripts/experiment/workloads/EXPERIMENT_LIST.txt`.
-    * `$workload_name` is the name of the workload to be used.
-    * `$is_exhaustive` should be `true` or `false`, indicating whether to instrument all the code paths or not.
+  * `$exp_file` is the name of the experiment, and should be one of the entries in `scripts/experiment/workloads/EXPERIMENT_LIST.txt`.
+  * `$workload_name` is the name of the workload to be used.
+  * `$is_exhaustive` should be `true` or `false`, indicating whether to instrument all the code paths or not.
 
 
 ### (Optional) Building the Docker Image
@@ -319,4 +335,4 @@ docker build -t my-turnstile-image:1.0 .
 ```
 
 The build might take 10 to 20 minutes, depending on your internet connection. Sometimes the build process can fail if your internet connection is not stable or fast enough, because it downloads a lot of data from Github and also installs a lot of dependencies using NPM.
-If it fails repeatedly, try increasing the memory allocation for the docker daemon.
+If it fails repeatedly, try increasing the memory allocation for the Docker daemon.
