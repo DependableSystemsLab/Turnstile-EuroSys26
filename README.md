@@ -1,5 +1,7 @@
 ## Turnstile -- EuroSys '26 Artifact
 
+[![DOI](https://zenodo.org/badge/1048736244.svg)](https://doi.org/10.5281/zenodo.17042222)
+
 This repository contains the artifact for the EuroSys '26 paper:
 
 > Turnstile: Hybrid Information Flow Control Framework for
