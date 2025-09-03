@@ -40,7 +40,12 @@ The quickest and recommended way to get started with running the artifact is to 
 * 61 third-party Node-RED repositories used in the evaluation (Section 6) and their dependencies
 * The experimental workload used in the run-time experiment described in Section 6.2
 
-First, download the Docker image from [HERE](https://drive.google.com/file/d/161drqct_DJ88BEEwjgyp3gE8_VaNjpiF/view?usp=sharing).
+First, [download the Docker image from HERE](https://drive.google.com/file/d/161drqct_DJ88BEEwjgyp3gE8_VaNjpiF/view?usp=sharing).
+> Checksum:
+>   MD5:    0b8552dbfd3d907c00d2f661415aae95
+>   SHA1:   7d7a4ab5f7ce085f5bf220d46433b6e2f95e255b
+>   SHA256: 1b4696eb34ab201404bfff70cb625fe0bf56c3e5b5282a3e261fee0fb930888e
+
 Then, load the image as the following:
 
 ```
