@@ -234,6 +234,14 @@ Let the experiment run -- **it can take up to 24 hours** and it will generate ab
 > 
 > # node run-experiment.js $exp_file V3-2fps true
 > ```
+> 
+> On the other hand, if you wish to run the "*full version*" of the experiments, run the following two scripts:
+> ```
+> ./generate-paper-workloads.sh
+> 
+> ./run-paper-experiments.sh
+> ```
+> The `generate-paper-workloads.sh` script generates all the workloads used in the paper, and the `run-paper-experiments.sh` script runs the experiment with all of the workloads used in the paper.
 
 Once the experiments have finished, there will be one or more directories in `/root/output` named `exp-YYYY-mm-dd`.
 ```

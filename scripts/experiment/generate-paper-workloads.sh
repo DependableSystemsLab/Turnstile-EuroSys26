@@ -21,7 +21,6 @@ do
     echo "----------------------------------------"
     
     node generate-workload.js $exp_file $workload_size 3 33 vertical
-    node generate-workload.js $exp_file $workload_size 3 0 vertical Batch
     
     node generate-workload.js $exp_file $workload_size 3 500 vertical V3-2fps
     node generate-workload.js $exp_file $workload_size 3 200 vertical V3-5fps
